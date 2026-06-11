@@ -17,17 +17,3 @@ body:
         Describe the issue you are experiencing here to communicate to the
         maintainers. Tell us what you were trying to do and what happened.
         Provide a clear and concise description of what the problem is.  Please paste subset of playbook output (The failing task) so we can priotize and try to start troubleshooting.
-  - type: textarea
-    validations:
-      required: true
-    attributes:
-      label: Extra vars file
-      description: >-
-        Paste verbatim output of cat vars.yml (the extra vars file used to provision the workshop). For more information on the extra vars file please refer to: https://github.com/ansible/workshops/tree/devel/provisioner#setup-per-workshop
-  - type: textarea
-    validations:
-      required: true
-    attributes:
-      label: Ansible Playbook Output
-      description: >-
-        Paste Ansible Playbook output
