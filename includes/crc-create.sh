@@ -38,8 +38,12 @@ if ! command -v crc &>/dev/null; then
   exit 1
 fi
 
-# Ensure CRC daemon is running (required on Linux, auto-started on macOS)
-if [ "$(uname)" != "Darwin" ] && ! [ -S ~/.crc/crc-http.sock ]; then
+# Ensure CRC daemon is running (Linux only — macOS/Windows manage the daemon)
+_is_mingw() {
+  case "$(uname -s)" in MINGW* | MSYS* | CYGWIN*) return 0 ;; *) return 1 ;; esac
+}
+
+if ! _is_mingw && [ "$(uname)" != "Darwin" ] && ! [ -S ~/.crc/crc-http.sock ]; then
   echo "Starting CRC daemon..."
   crc daemon &>/dev/null &
   disown
@@ -471,7 +475,7 @@ COREFILE_EOF
       echo "  ✓ CoreDNS configured (re-patched): ${ROUTE_DOMAIN} → router service"
     else
       printf "  ${_YELLOW}WARNING: CoreDNS config not persisting — DNS operator keeps overwriting${_NC}\n"
-      echo "  If pods can't resolve nip.io routes, run: aap-demo start"
+      echo "  If pods can't resolve nip.io routes, run: crc start"
     fi
   fi
 fi
