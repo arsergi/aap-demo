@@ -246,7 +246,7 @@ FLEET_NODE_CPUS=2        # VM CPU count (default: 2)
 FLEET_IMAGE=~/rhel9.qcow2  # Default QCOW2 image path
 ```
 
-### Common Commands
+## Common Commands
 
 ```bash
 # Deployment
