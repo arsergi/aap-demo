@@ -114,7 +114,11 @@ for arg in "$@"; do
       PENDING_FLAG="kubeconfig"
       ;;
     deploy | deploy-all | deploy-operator | deploy-aap | repair | clean | destroy | stop | start | setup | create | watch | status | update | config | redeploy | redeploy-all | redhat-status | rh-status | kubeconfig | ssh | idle | diagnose | must-gather | enable | disable | test | fleet | help | --help | -h)
-      COMMAND="$arg"
+      if [ -z "$COMMAND" ]; then
+        COMMAND="$arg"
+      else
+        EXTRA_ARGS+=("$arg")
+      fi
       ;;
     --ai | --reset)
       # Flags for diagnose --ai and destroy --reset
